@@ -1,0 +1,9 @@
+[submodule "wordcloud-core"]
+	path = wordcloud-core
+	url = git@github.com:kikopolis/wordcloud-core.git
+[submodule "wordcloud-worker"]
+	path = wordcloud-worker
+	url = git@github.com:kikopolis/wordcloud-worker.git
+[submodule "wordcloud-front-end"]
+	path = wordcloud-front-end
+	url = git@github.com:kikopolis/wordcloud-front-end.git
