@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_package = "com.kikopolis.mq";
+option java_outer_classname = "MqMessageProto";
+
+message MqMessage {
+  bytes file = 1;
+  string ignoredWords = 2;
+  bool ignoreDefaultWords = 3;
+  string uuid = 4;
+}

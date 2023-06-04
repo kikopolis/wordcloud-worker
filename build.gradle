@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.0'
     id 'io.spring.dependency-management' version '1.1.0'
+    id "com.google.protobuf" version "0.9.3"
 }
 
 group = 'com.kikopolis'
@@ -17,8 +18,28 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jersey'
     implementation 'org.mariadb.jdbc:mariadb-java-client'
+    implementation 'com.google.protobuf:protobuf-java:3.23.2'
+
+    testImplementation 'org.hamcrest:hamcrest:2.1'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.amqp:spring-rabbit-test'
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.23.2"
+    }
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir 'src/main/proto'
+        }
+        java {
+            srcDirs 'build/generated/source/proto/main/java'
+        }
+    }
 }
 
 jar {
@@ -35,6 +56,14 @@ jar {
     }
 }
 
+
+
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.withType(Copy).configureEach {
+    filesMatching("**/*.proto") {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
 }
